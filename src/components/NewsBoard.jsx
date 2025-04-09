@@ -7,19 +7,20 @@ const NewsBoard = ({category}) => {
 
     const[articles,setArticle]=useState([]);
 
-   useEffect(() => {
-  const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${import.meta.env.VITE_API_KEY}`;
-
+  useEffect(() => {
+  const url = `/api/news?category=${category}`;
+  
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      console.log(data); // 🔍 Check for errors or empty result
+      console.log(data); // check what's returned
       setArticle(data.articles || []);
     })
     .catch(err => {
       console.error("Failed to fetch news:", err);
     });
 }, [category]);
+
 
 
   return (
